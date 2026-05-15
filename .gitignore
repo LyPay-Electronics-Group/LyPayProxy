@@ -1,0 +1,7 @@
+/.idea/
+
+/.*env*
+/*.json
+
+/__pycache__/
+/*/__pycache__/
