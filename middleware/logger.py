@@ -1,7 +1,7 @@
 from ipaddress import ip_address
 
 from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.types import ASGIApp, Request
+from starlette.types import ASGIApp
 from logging import Logger
 from http import HTTPStatus
 
@@ -29,7 +29,8 @@ class CustomLog(BaseHTTPMiddleware):
             client = Fore.LIGHTBLACK_EX + Style.BRIGHT + client_host
             client_tab = " " * max(self.max_client_length - len(client_host), 0)
 
-            token = getattr(request.state, "token", "<missing>")
+            query = dict(request.query_params)
+            token = query.pop("token", "default")
             token_str = Fore.YELLOW + Style.DIM + str(token)
             token_tab = " " * max(self.max_token_length - len(token), 0)
 
@@ -87,7 +88,7 @@ class CustomLog(BaseHTTPMiddleware):
                 return normalized
         return None
 
-    def extract_client_ip(self, request: Request) -> str:
+    def extract_client_ip(self, request) -> str:
         """Извлекает client ip."""
         peer_ip = self._normalize_ip_candidate(request.client.host if request.client else None) or "unknown"
         if peer_ip == "unknown":
