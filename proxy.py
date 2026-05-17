@@ -26,9 +26,9 @@ async def proxy_path(path: str, request: Request):
                 headers=headers
             )
             body = await response.read()
-    except Exception as e:
+    except Exception:
         return Response(
-            content=f"Bad Gateway: {e}",
+            content=f"[502] Bad Gateway",
             status_code=502,
         )
 
