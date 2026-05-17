@@ -30,7 +30,7 @@ class CustomLog(BaseHTTPMiddleware):
             client_tab = " " * max(self.max_client_length - len(client_host), 0)
 
             query = dict(request.query_params)
-            token = query.pop("token", "default")
+            token = query.pop("token", "<missing>")
             token_str = Fore.YELLOW + Style.DIM + str(token)
             token_tab = " " * max(self.max_token_length - len(token), 0)
 
