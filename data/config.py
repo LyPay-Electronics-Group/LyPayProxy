@@ -19,6 +19,6 @@ EXCLUDED_HEADERS = {
     "connection",
 }
 
-VERSION = "v2.6x"
-NAME = "Public API"
-BUILD = 25
+VERSION = "v3.1x"
+NAME = "Public API Proxy Connector"
+BUILD = 26
