@@ -9,8 +9,8 @@ if get_platform() == "Windows":
     system(
         f"uvicorn server:app "
         "--no-access-log "
-        f"--host {getenv('LYPAY_HOST')} "
-        f"--port {getenv('LYPAY_PORT')}"
+        f"--host {getenv('LYPAY_PROXY_HOST')} "
+        f"--port {getenv('LYPAY_PROXY_PORT')}"
    )
 
 elif get_platform() == "Linux":
@@ -18,6 +18,6 @@ elif get_platform() == "Linux":
         f"uvicorn server:app "
         "--no-access-log "
         # f"--workers $(nproc) "
-        f"--host {getenv('LYPAY_HOST')} "
-        f"--port {getenv('LYPAY_PORT')}"
+        f"--host {getenv('LYPAY_PROXY_HOST')} "
+        f"--port {getenv('LYPAY_PROXY_PORT')}"
     )

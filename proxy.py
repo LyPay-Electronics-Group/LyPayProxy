@@ -7,7 +7,7 @@ from data.config import CORE_HOST, CORE_PORT, SSL, EXCLUDED_HEADERS
 router = APIRouter()
 load_dotenvy()
 
-ADMIN_TOKEN = getenv("LYPAY_ADMIN_TOKEN")
+MASTER_TOKEN = getenv("LYPAY_MASTER_TOKEN")
 
 
 @router.get("/{path:path}")
@@ -17,7 +17,7 @@ async def proxy_path(path: str, request: Request):
     """
 
     token = getattr(request.state, "token", "<missing>")
-    if token == ADMIN_TOKEN:
+    if token == MASTER_TOKEN:
         return Response(
             content="[403] Forbidden",
             status_code=403
