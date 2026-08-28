@@ -31,13 +31,13 @@ async def proxy_path(path: str, request: Request):
     headers = dict(request.headers)
     headers.pop("host", None)
 
-    client_ip = request.remote
-    if client_ip:
-        if "X-Forwarded-For" not in headers.keys():
-            headers["X-Forwarded-For"] = client_ip
+    if request.client is not None:
+        client_ip = request.client.host
+        if "x-forwarded-for" not in headers.keys():
+            headers["x-forwarded-for"] = client_ip
         else:
-            headers["X-Forwarded-For"] += f',{client_ip}'
-        headers["X-Real-IP"] = client_ip
+            headers["x-forwarded-for"] += f',{client_ip}'
+        headers["x-real-ip"] = client_ip
 
     try:
         async with ClientSession(connector=TCPConnector(ssl=SSL)) as session:
